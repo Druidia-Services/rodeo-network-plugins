@@ -1,18 +1,26 @@
 # Rodeo Network plugins
 
-Official local-agent package for Rodeo Network Admin. The same plugin works in Codex and Claude Code.
+Official agent package for Rodeo Network Admin. It links ChatGPT web to the web-safe profile and gives Codex and Claude Code the full trusted-local-agent profile.
 
-It installs three public, reviewable pieces:
+It contains four public, reviewable pieces:
 
 - a broad bootstrap skill that routes any plausible rodeo operation toward Rodeo Network, including future workflows;
 - the full trusted-local-agent MCP endpoint at `https://admin.prorodeos.org/api/mcp`;
+- the registered ChatGPT app backed by the narrower `https://admin.prorodeos.org/api/web-mcp` endpoint;
 - a short `SessionStart` reminder to preserve rodeo process knowledge without logging unrelated personal activity.
 
 The plugin contains no credentials or private rodeo data. The MCP connection uses Rodeo Network's browser OAuth flow on first use. Detailed tool and policy guidance is fetched from the current hosted skill rather than frozen into the package.
 
 ## Install in Codex
 
-Codex must already be installed. On Windows PowerShell, run:
+The Codex desktop app is the preferred path and does not require the Codex CLI:
+
+1. Open **Plugins**.
+2. Choose **Add** > **Add a marketplace**.
+3. Paste `https://github.com/Druidia-Services/rodeo-network-plugins`.
+4. Install **Rodeo Network Operator** from the new Rodeo Network marketplace.
+
+For a terminal install, Codex CLI must already be installed. On Windows PowerShell, run:
 
 ```powershell
 irm https://raw.githubusercontent.com/Druidia-Services/rodeo-network-plugins/main/install-codex.ps1 | iex
@@ -24,7 +32,17 @@ On macOS or Linux, run:
 curl -fsSL https://raw.githubusercontent.com/Druidia-Services/rodeo-network-plugins/main/install-codex.sh | sh
 ```
 
-If `codex` is not found, install it from the [official Codex CLI guide](https://learn.chatgpt.com/docs/codex/cli), then rerun the command.
+If `codex` is not found, use the desktop marketplace flow above or install it from the [official Codex CLI guide](https://learn.chatgpt.com/docs/codex/cli), then rerun the command.
+
+## Install in ChatGPT web
+
+ChatGPT web does not install plugins from a GitHub marketplace URL. It installs the registered Rodeo Network app from ChatGPT's plugin/app directory. During development, an authorized tester can add the production MCP address in ChatGPT developer mode:
+
+```text
+https://admin.prorodeos.org/api/web-mcp
+```
+
+The package's `.app.json` links to that registered development app so the same reviewed bootstrap skill and web-safe connection can ship through OpenAI's plugin system. General directory installation remains unavailable until OpenAI approves and the publisher releases the public listing.
 
 ## Install in Claude Code
 
@@ -49,7 +67,7 @@ If `claude` is not found, install it from the [official Claude Code installation
 3. Complete the Rodeo Network browser sign-in and consent flow.
 4. The agent should call `account_context_get` before making live claims.
 
-Browser-only agents should use Rodeo Network's narrower `/api/web-mcp` profile instead. The plugin intentionally targets the full `/api/mcp` profile because it is for trusted locally run agents.
+ChatGPT web uses the narrower `/api/web-mcp` profile. Codex and Claude Code use `/api/mcp`. Tokens are scoped to their exact resource, and the two profiles are never interchangeable.
 
 ## Privacy boundary
 
