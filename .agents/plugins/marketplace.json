@@ -1,0 +1,20 @@
+{
+  "name": "rodeo-network",
+  "interface": {
+    "displayName": "Rodeo Network"
+  },
+  "plugins": [
+    {
+      "name": "rodeo-network-operator",
+      "source": {
+        "source": "local",
+        "path": "./plugins/rodeo-network-operator"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

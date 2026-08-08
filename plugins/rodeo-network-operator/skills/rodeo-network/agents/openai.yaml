@@ -1,0 +1,4 @@
+interface:
+  display_name: "Rodeo Network"
+  short_description: "Operate rodeos and preserve continuity"
+  default_prompt: "Use $rodeo-network to help with this rodeo operation and capture the transferable process."

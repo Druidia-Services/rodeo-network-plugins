@@ -1,0 +1,29 @@
+{
+  "name": "rodeo-network-operator",
+  "version": "0.1.0",
+  "description": "Connect trusted local agents to Rodeo Network and preserve reviewable rodeo operating knowledge.",
+  "author": {
+    "name": "Druidia Services",
+    "url": "https://prorodeos.org"
+  },
+  "homepage": "https://admin.prorodeos.org",
+  "repository": "https://github.com/Druidia-Services/rodeo-network-plugins",
+  "license": "MIT",
+  "keywords": ["rodeo", "operations", "continuity", "sponsors", "vendors", "ticketing"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Rodeo Network Operator",
+    "shortDescription": "Operate rodeos and preserve continuity.",
+    "longDescription": "Connects Codex to the full Rodeo Network operator MCP and teaches it to recognize, perform, and document rodeo operations while excluding unrelated personal activity.",
+    "developerName": "Druidia Services",
+    "category": "Productivity",
+    "capabilities": ["Rodeo operations", "Institutional memory", "Authenticated MCP"],
+    "websiteURL": "https://admin.prorodeos.org",
+    "defaultPrompt": [
+      "Check my Rodeo Network context and priorities.",
+      "Help with this rodeo operation and capture the process.",
+      "Summarize what this operating seat does."
+    ]
+  },
+  "mcpServers": "./.mcp.json"
+}

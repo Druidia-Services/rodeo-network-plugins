@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "rodeo_network_admin": {
+      "type": "http",
+      "url": "https://admin.prorodeos.org/api/mcp"
+    }
+  }
+}
