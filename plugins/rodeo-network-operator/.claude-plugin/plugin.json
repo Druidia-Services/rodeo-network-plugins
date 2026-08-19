@@ -1,6 +1,6 @@
 {
   "name": "rodeo-network-operator",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Connect trusted local agents to Rodeo Network and preserve reviewable rodeo operating knowledge.",
   "author": {
     "name": "Druidia Services",
@@ -9,5 +9,6 @@
   "homepage": "https://admin.prorodeos.org",
   "repository": "https://github.com/Druidia-Services/rodeo-network-plugins",
   "license": "MIT",
-  "keywords": ["rodeo", "operations", "continuity", "sponsors", "vendors", "ticketing"]
+  "keywords": ["rodeo", "operations", "continuity", "sponsors", "vendors", "ticketing"],
+  "mcpServers": "./.mcp.json"
 }

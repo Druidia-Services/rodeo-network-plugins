@@ -5,8 +5,8 @@ Official agent package for Rodeo Network Admin. It links ChatGPT web to the web-
 It contains four public, reviewable pieces:
 
 - a broad bootstrap skill that routes any plausible rodeo operation toward Rodeo Network, including future workflows;
-- the full trusted-local-agent MCP endpoint at `https://admin.prorodeos.org/api/mcp`;
-- the registered ChatGPT app backed by the narrower `https://admin.prorodeos.org/api/web-mcp` endpoint;
+- two MCP servers installed together in Codex and Claude Code: the full trusted-local-agent endpoint at `https://admin.prorodeos.org/api/mcp` (`rodeo_network_admin`) and the narrower web-safe endpoint at `https://admin.prorodeos.org/api/web-mcp` (`rodeo_network_web`);
+- the registered ChatGPT app backed by the same web-safe `/api/web-mcp` endpoint;
 - a short `SessionStart` reminder to preserve rodeo process knowledge without logging unrelated personal activity.
 
 The plugin contains no credentials or private rodeo data. The MCP connection uses Rodeo Network's browser OAuth flow on first use. Detailed tool and policy guidance is fetched from the current hosted skill rather than frozen into the package.
@@ -67,7 +67,7 @@ If `claude` is not found, install it from the [official Claude Code installation
 3. Complete the Rodeo Network browser sign-in and consent flow.
 4. The agent should call `account_context_get` before making live claims.
 
-ChatGPT web uses the narrower `/api/web-mcp` profile. Codex and Claude Code use `/api/mcp`. Tokens are scoped to their exact resource, and the two profiles are never interchangeable.
+ChatGPT web uses the narrower `/api/web-mcp` profile. Codex and Claude Code install both servers: `rodeo_network_admin` (`/api/mcp`, the full operator profile — the one to authenticate for normal work) and `rodeo_network_web` (`/api/web-mcp`, the web-safe profile, useful for testing exactly what browser and mobile agents can see). Each server completes its own OAuth consent; tokens are scoped to their exact resource, and the two profiles are never interchangeable.
 
 ## Privacy boundary
 
