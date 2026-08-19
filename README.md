@@ -64,7 +64,7 @@ If `claude` is not found, install it from the [official Claude Code installation
 
 1. Review and trust the plugin's `SessionStart` hook when the runtime asks.
 2. Start a fresh session and ask the agent to check Rodeo Network access.
-3. Complete the Rodeo Network browser sign-in and consent flow.
+3. Complete the Rodeo Network browser sign-in for `rodeo_network_admin` (the full operator connection). `rodeo_network_web` is optional — only authenticate it to test the web-safe profile.
 4. The agent should call `account_context_get` before making live claims.
 
 ChatGPT web uses the narrower `/api/web-mcp` profile. Codex and Claude Code install both servers: `rodeo_network_admin` (`/api/mcp`, the full operator profile — the one to authenticate for normal work) and `rodeo_network_web` (`/api/web-mcp`, the web-safe profile, useful for testing exactly what browser and mobile agents can see). Each server completes its own OAuth consent; tokens are scoped to their exact resource, and the two profiles are never interchangeable.
