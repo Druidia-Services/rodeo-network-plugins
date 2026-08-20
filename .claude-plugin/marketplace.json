@@ -11,7 +11,7 @@
       "name": "rodeo-network-operator",
       "source": "./plugins/rodeo-network-operator",
       "description": "Operate Rodeo Network from Codex or Claude Code and preserve institutional memory.",
-      "version": "0.3.0",
+      "version": "0.4.0",
       "category": "productivity"
     }
   ]

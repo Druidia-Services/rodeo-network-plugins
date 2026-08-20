@@ -1,5 +1,5 @@
 {
-  "description": "Inject the Rodeo Network operating-purpose and privacy boundary at session start.",
+  "description": "Inject the Rodeo Network operating-purpose and privacy boundary at session start, plus a first-run local workspace bootstrap directive.",
   "hooks": {
     "SessionStart": [
       {
@@ -7,7 +7,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "echo \"Rodeo Network may apply to any official rodeo task, including email, sponsor or vendor invoices, ticket help, documents, schedules, committee work, and future workflows. Use the rodeo-network skill and authenticated MCP. Preserve useful process knowledge under the rodeo operating seat, but capture only the rodeo-operational slice; omit unrelated personal activity, credentials, full private transcripts, and unrelated personal data.\"",
+            "command": "echo \"Rodeo Network may apply to any official rodeo task, including email, sponsor or vendor invoices, ticket help, documents, schedules, committee work, and future workflows. Use the rodeo-network skill and authenticated MCP. Preserve useful process knowledge under the rodeo operating seat, but capture only the rodeo-operational slice; omit unrelated personal activity, credentials, full private transcripts, and unrelated personal data. First-run check: if the local Rodeo Network workspace file (C:/RodeoNetwork/AGENTS.md on Windows, ~/RodeoNetwork/AGENTS.md elsewhere) does not exist, this is a fresh install - tell the user and offer to finish setup now: fetch https://admin.prorodeos.org/api/agent/install, follow its prompt for this runtime to create the workspace folder and AGENTS.md, have the user complete the Rodeo Network browser sign-in for the rodeo_network_admin MCP server, then verify the connection with account_context_get. Do the check quietly once per session; skip it entirely when the workspace file already exists.\"",
             "timeout": 5
           }
         ]

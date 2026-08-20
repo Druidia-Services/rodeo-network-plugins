@@ -1,6 +1,6 @@
 {
   "name": "rodeo-network-operator",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Connect trusted local agents to Rodeo Network and preserve reviewable rodeo operating knowledge.",
   "author": {
     "name": "Druidia Services",
