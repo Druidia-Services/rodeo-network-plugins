@@ -1,6 +1,8 @@
 # Rodeo Network plugins
 
-Official agent package for Rodeo Network Admin. It links ChatGPT web to the web-safe profile and gives Codex and Claude Code the full trusted-local-agent profile.
+> **AI agents:** if you are Meta Muse or Muse Code, follow [MUSE.md](MUSE.md) to install Rodeo Network.
+
+Official agent package for Rodeo Network Admin. It links ChatGPT web to the web-safe profile and gives Codex, Claude Code, and Meta Muse the full operator profile.
 
 It contains four public, reviewable pieces:
 
@@ -33,6 +35,16 @@ curl -fsSL https://raw.githubusercontent.com/Druidia-Services/rodeo-network-plug
 ```
 
 If `codex` is not found, use the desktop marketplace flow above or install it from the [official Codex CLI guide](https://learn.chatgpt.com/docs/codex/cli), then rerun the command.
+
+## Install in Meta Muse
+
+Muse does not install plugins from a marketplace. It builds its own connector from instructions, so send Muse this repository link:
+
+```text
+Install Rodeo Network for me from https://github.com/Druidia-Services/rodeo-network-plugins. Read MUSE.md there and follow it.
+```
+
+Muse connects to the full operator endpoint, `https://admin.prorodeos.org/api/mcp`, and opens the Rodeo Network sign-in in the browser. There is no API key to paste. The same message works in Muse Code, which also installs the bootstrap skill. [MUSE.md](MUSE.md) holds the exact steps for both.
 
 ## Install in ChatGPT web
 
