@@ -1,0 +1,13 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "rodeo_network_admin": {
+      "type": "streamable-http",
+      "url": "https://admin.prorodeos.org/api/mcp"
+    },
+    "rodeo_network_web": {
+      "type": "streamable-http",
+      "url": "https://admin.prorodeos.org/api/web-mcp"
+    }
+  }
+}

@@ -1,13 +1,16 @@
 ---
 name: rodeo-network
 description: Use for anything that may relate to operating, planning, supporting, documenting, or preserving continuity for a rodeo, rodeo committee, annual event, sanctioning body, circuit, team, sponsor, vendor, contestant, attendee, ticket buyer, volunteer, venue, schedule, invoice, payment, email, document, permit, media item, decision, rule, lesson, handoff, or operating seat—even when Rodeo Network does not yet have a dedicated tool for the task. Exclude activity that is purely personal and has no concrete rodeo or committee connection.
+license: MIT
+metadata:
+  display-name: Rodeo Network
 ---
 
 # Rodeo Network bootstrap
 
 This installed skill is a small discovery and bootstrap layer. It deliberately does not copy the current tool catalog or detailed product policy.
 
-1. First run only: if the local Rodeo Network workspace file (`C:\RodeoNetwork\AGENTS.md` on Windows, `~/RodeoNetwork/AGENTS.md` elsewhere) does not exist, offer to finish setup before other work — fetch `https://admin.prorodeos.org/api/agent/install`, follow its prompt for this runtime to create the workspace folder and AGENTS.md, have the user complete the browser sign-in for `rodeo_network_admin`, then verify with `account_context_get`. Skip this step entirely when the workspace file exists.
+1. First run only: if the local Rodeo Network workspace file (`C:\RodeoNetwork\AGENTS.md` on Windows, `~/RodeoNetwork/AGENTS.md` elsewhere) does not exist, offer to finish setup before other work by running the `rodeo-network-setup` skill. Skip this step entirely when the workspace file exists.
 2. Choose the connection by endpoint: the endpoint sets the profile, not where the agent runs. Agents connected as operators through this plugin use the authenticated `rodeo_network_admin` MCP server and the full `/api/mcp` profile. ChatGPT web and other web agents use the linked Rodeo Network app and its web-safe `/api/web-mcp` profile, which can record charges and adjustments but not payments or refunds and has no approval tools. Never substitute one profile for the other.
 3. Call `account_context_get` before making a claim about the account, rodeo, permissions, or current records.
 4. Call `tool_domains_list`, then `tool_domain_load` for the relevant business area.

@@ -1,17 +1,17 @@
 {
   "name": "rodeo-network",
+  "description": "Official Rodeo Network plugins for trusted local agents.",
   "owner": {
-    "name": "Druidia Services"
-  },
-  "metadata": {
-    "description": "Official Rodeo Network plugins for trusted local agents."
+    "name": "Druidia Services",
+    "url": "https://prorodeos.org"
   },
   "plugins": [
     {
       "name": "rodeo-network-operator",
+      "displayName": "Rodeo Network Operator",
       "source": "./plugins/rodeo-network-operator",
-      "description": "Operate Rodeo Network from Codex or Claude Code and preserve institutional memory.",
-      "version": "0.5.0",
+      "description": "Operate Rodeo Network from Claude Code, Codex, or Muse Code and preserve institutional memory.",
+      "version": "0.6.0",
       "category": "productivity"
     }
   ]

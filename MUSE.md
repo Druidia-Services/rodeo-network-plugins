@@ -17,7 +17,7 @@ There are two Muse products. Follow the section for the one you are.
 
 ## Muse app
 
-Muse does not install plugins or skill files. You build a custom connector to the Rodeo Network MCP server and save it as a reusable skill.
+The Muse app does not install plugins or skill files. You create a custom connector to the Rodeo Network MCP server and keep the operating rules below with it.
 
 ### 1. Build the connector
 
@@ -46,14 +46,14 @@ The person signs in to Rodeo Network in the browser window and approves access. 
 
 ### 3. Save the operating rules with the connector
 
-When you save the connector as a reusable skill, include these rules in it so every future conversation starts correctly:
+Keep these rules with the connector (in its instructions, or in a saved skill if you save one) so every future conversation starts correctly:
 
 - Copy the body of [`plugins/rodeo-network-operator/skills/rodeo-network/SKILL.md`](plugins/rodeo-network-operator/skills/rodeo-network/SKILL.md) into the saved skill. It says when a task counts as rodeo work, the first calls to make, how gated actions are approved, and what not to log. Skip its first-run step about a local `AGENTS.md`; your saved skill takes that file's place.
 - At the start of every Rodeo Network task, fetch `https://admin.prorodeos.org/api/agent/skill` and follow it. That hosted skill is the current operating policy and changes without notice. Do not save a frozen copy of it.
 
 ### 4. Approvals
 
-Suggest that the person set this connector to require approval for each action in Muse settings until they are comfortable with it. That approval is Muse's own check. It does not replace Rodeo Network's: money, publishing, deleting, and erasing a person's data still need a prepared review, recorded with `action_review_decide` only after the person explicitly approves in chat.
+Suggest that the person set this connector to require approval for each write in Muse settings until they are comfortable with it. If a write's details (amount, recipient, rodeo, scope) change after the person approved it, ask again. That approval is Muse's own check. It does not replace Rodeo Network's: money, publishing, deleting, and erasing a person's data still need a prepared review, recorded with `action_review_decide` only after the person explicitly approves in chat.
 
 ### 5. What your computer can and cannot do here
 
@@ -65,26 +65,14 @@ Stop and tell the person which step failed: client registration, the sign-in win
 
 ## Muse Code
 
-Muse Code reads standard skill folders and remote MCP servers, so it installs much like Claude Code.
+Muse Code installs Claude-format plugins, including their skills, hooks, and MCP servers. Install the Rodeo Network plugin from this repository's marketplace instead of copying files by hand.
 
-1. **Add the MCP server.** In your user settings file (`~/.config/muse/settings.json`, or the settings file your installation uses), merge this into `mcp_servers`. Keep `"schema_version": 1` and every existing entry:
+1. **Install the plugin.** Use `muse plugins` (or `/plugins` in a session) to add this repository, `Druidia-Services/rodeo-network-plugins`, as a marketplace and install `rodeo-network-operator` from the `rodeo-network` marketplace. Run `muse plugins --help` for the exact subcommands your version uses.
+2. **Review what it installs.** Muse Code asks the person to review the plugin's `SessionStart` hook and its two MCP servers. The hook only prints static policy text; it reads no files and sends nothing. Approve `rodeo_network_admin`. `rodeo_network_web` is optional and only for testing the web-safe profile.
+3. **Sign in.** Have the person run `muse mcp login rodeo_network_admin` and finish the browser sign-in. Do not ask for tokens.
+4. **Finish setup.** Start a fresh session and run the plugin's `rodeo-network-setup` skill. It creates `C:\RodeoNetwork\AGENTS.md` on Windows or `~/RodeoNetwork/AGENTS.md` elsewhere, which Muse Code reads natively when a session starts in that folder, and verifies the connection with `account_context_get`.
 
-   ```json
-   {
-     "mcp_servers": {
-       "rodeo_network_admin": {
-         "transport": "streamable_http",
-         "url": "https://admin.prorodeos.org/api/mcp"
-       }
-     }
-   }
-   ```
-
-2. **Sign in.** Have the person run `muse mcp login rodeo_network_admin` and finish the browser sign-in. Do not ask for tokens.
-3. **Install the bootstrap skill.** Copy the folder [`plugins/rodeo-network-operator/skills/rodeo-network/`](plugins/rodeo-network-operator/skills/rodeo-network/) to `~/.agents/skills/rodeo-network/`. The skill's own first-run step creates the local workspace: it fetches `https://admin.prorodeos.org/api/agent/install` and writes `C:\RodeoNetwork\AGENTS.md` on Windows or `~/RodeoNetwork/AGENTS.md` elsewhere. Muse Code reads `AGENTS.md` natively when a session starts in that folder.
-4. **Verify.** Start a fresh session in the RodeoNetwork folder. Run `muse mcp` to confirm `rodeo_network_admin` and its tools, then call `account_context_get`.
-
-The plugin's `SessionStart` hook is written for Claude Code and Codex and is not installed in Muse Code. The skill carries the same privacy boundary.
+If your Muse Code version cannot install plugins, fall back to a manual install: merge `"rodeo_network_admin": {"transport": "streamable_http", "url": "https://admin.prorodeos.org/api/mcp"}` into `mcp_servers` in your user settings file (`~/.config/muse/settings.json`, keeping `"schema_version": 1` and every existing entry), copy the folders under [`plugins/rodeo-network-operator/skills/`](plugins/rodeo-network-operator/skills/) to `~/.agents/skills/`, then follow steps 3 and 4. The manual install has no `SessionStart` hook; the skill carries the same privacy boundary.
 
 ## Privacy boundary
 

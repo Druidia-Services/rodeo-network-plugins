@@ -4,12 +4,15 @@
 
 Official agent package for Rodeo Network Admin. It links ChatGPT web to the web-safe profile and gives Codex, Claude Code, and Meta Muse the full operator profile.
 
-It contains four public, reviewable pieces:
+It contains these public, reviewable pieces:
 
 - a broad bootstrap skill that routes any plausible rodeo operation toward Rodeo Network, including future workflows;
+- a `rodeo-network-setup` skill that creates the local workspace, signs in, and verifies the connection (Codex runs it as the plugin's onboarding step);
 - two MCP servers installed together in Codex and Claude Code: the full trusted-local-agent endpoint at `https://admin.prorodeos.org/api/mcp` (`rodeo_network_admin`) and the narrower web-safe endpoint at `https://admin.prorodeos.org/api/web-mcp` (`rodeo_network_web`);
 - the registered ChatGPT app backed by the same web-safe `/api/web-mcp` endpoint;
 - a short `SessionStart` reminder to preserve rodeo process knowledge without logging unrelated personal activity.
+
+One package serves every runtime. Codex reads the portable Agent Plugins manifest (`plugin.json` and `mcp.json` at the plugin root, with OpenAI settings under `extensions.com.openai`) and keeps `.codex-plugin/plugin.json` as its compatibility fallback. Claude Code and Muse Code read `.claude-plugin/plugin.json` and `.mcp.json`. All of them share `skills/`, `hooks/hooks.json`, and `assets/`.
 
 The plugin contains no credentials or private rodeo data. The MCP connection uses Rodeo Network's browser OAuth flow on first use. Detailed tool and policy guidance is fetched from the current hosted skill rather than frozen into the package.
 
@@ -38,13 +41,13 @@ If `codex` is not found, use the desktop marketplace flow above or install it fr
 
 ## Install in Meta Muse
 
-Muse does not install plugins from a marketplace. It builds its own connector from instructions, so send Muse this repository link:
+Send Muse this repository link:
 
 ```text
 Install Rodeo Network for me from https://github.com/Druidia-Services/rodeo-network-plugins. Read MUSE.md there and follow it.
 ```
 
-Muse connects to the full operator endpoint, `https://admin.prorodeos.org/api/mcp`, and opens the Rodeo Network sign-in in the browser. There is no API key to paste. The same message works in Muse Code, which also installs the bootstrap skill. [MUSE.md](MUSE.md) holds the exact steps for both.
+The Muse app does not install plugins, so it builds its own connector from [MUSE.md](MUSE.md). Muse Code installs this repository's plugin directly, with its skills, hook, and MCP servers. Both connect to the full operator endpoint, `https://admin.prorodeos.org/api/mcp`, and open the Rodeo Network sign-in in the browser. There is no API key to paste.
 
 ## Install in ChatGPT web
 
@@ -54,11 +57,17 @@ ChatGPT web does not install plugins from a GitHub marketplace URL. It installs 
 https://admin.prorodeos.org/api/web-mcp
 ```
 
-The package's `.app.json` links to that registered development app so the same reviewed bootstrap skill and web-safe connection can ship through OpenAI's plugin system. General directory installation remains unavailable until OpenAI approves and the publisher releases the public listing.
+The package's `.app.json` links to that registered development app so the same reviewed bootstrap skill and web-safe connection can ship through OpenAI's plugin system. General directory installation remains unavailable until OpenAI approves and the publisher releases the public listing. OpenAI's public plugin directory does not accept packages with lifecycle hooks, so a public listing will ship as a hook-free package; this repository's package, with its `SessionStart` hook, is for manual marketplace installs in Codex desktop and the CLI.
 
 ## Install in Claude Code
 
-Claude Code must already be installed. On Windows PowerShell, run:
+In Claude Code 2.1.275 or later, run this inside a session:
+
+```text
+/plugin install rodeo-network-operator --marketplace Druidia-Services/rodeo-network-plugins
+```
+
+For a terminal install, Claude Code must already be installed. On Windows PowerShell, run:
 
 ```powershell
 irm https://raw.githubusercontent.com/Druidia-Services/rodeo-network-plugins/main/install-claude.ps1 | iex
@@ -74,8 +83,8 @@ If `claude` is not found, install it from the [official Claude Code installation
 
 ## First use
 
-1. Review and trust the plugin's `SessionStart` hook when the runtime asks.
-2. Start a fresh session and ask the agent to check Rodeo Network access.
+1. Review and trust the plugin's `SessionStart` hook when the runtime asks (`/hooks` in Codex).
+2. Start a fresh session and run the `rodeo-network-setup` skill, or ask the agent to check Rodeo Network access.
 3. Complete the Rodeo Network browser sign-in for `rodeo_network_admin` (the full operator connection). `rodeo_network_web` is optional — only authenticate it to test the web-safe profile.
 4. The agent should call `account_context_get` before making live claims.
 

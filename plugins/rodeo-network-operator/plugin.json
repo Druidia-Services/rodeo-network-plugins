@@ -1,0 +1,40 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "rodeo-network-operator",
+  "version": "0.6.0",
+  "description": "Connect web and trusted local agents to the correct Rodeo Network profile and preserve reviewable operating knowledge.",
+  "author": {
+    "name": "Druidia Services",
+    "url": "https://prorodeos.org"
+  },
+  "homepage": "https://admin.prorodeos.org",
+  "repository": "https://github.com/Druidia-Services/rodeo-network-plugins",
+  "license": "MIT",
+  "keywords": ["rodeo", "operations", "continuity", "sponsors", "vendors", "ticketing"],
+  "extensions": {
+    "com.openai": {
+      "apps": "./.app.json",
+      "onboardingSkill": "./skills/rodeo-network-setup/SKILL.md",
+      "interface": {
+        "displayName": "Rodeo Network Operator",
+        "shortDescription": "Run rodeos, keep continuity",
+        "longDescription": "Connects ChatGPT web to Rodeo Network's web-safe MCP profile and trusted local agents to the full operator profile. The bootstrap skill recognizes and documents rodeo operations while excluding unrelated personal activity.",
+        "developerName": "Druidia Services",
+        "category": "Productivity",
+        "capabilities": ["Rodeo operations", "Institutional memory", "Authenticated MCP"],
+        "websiteURL": "https://admin.prorodeos.org",
+        "supportURL": "https://admin.prorodeos.org/support",
+        "privacyPolicyURL": "https://admin.prorodeos.org/privacy",
+        "termsOfServiceURL": "https://admin.prorodeos.org/terms",
+        "defaultPrompt": [
+          "Check my Rodeo Network context and priorities.",
+          "Help with this rodeo operation and capture the process.",
+          "Summarize what this operating seat does."
+        ],
+        "brandColor": "#5B4A6B",
+        "composerIcon": "./assets/icon.svg",
+        "logo": "./assets/logo.png"
+      }
+    }
+  }
+}
